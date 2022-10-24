@@ -48,13 +48,6 @@ fetch(url).then(function (element) {
          sessionStorage.setItem('storageWind', data1.wind);
          sessionStorage.setItem('storageDis', data1.description);
          sessionStorage.setItem('storageSelect', select.value);
-
-         // обновление данных страницы каждую минуту 
-         setInterval(() => {
-            if (select.value) {
-               this(select.value)
-            }
-         }, 60000)
       })
    })
 })
