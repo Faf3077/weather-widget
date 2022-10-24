@@ -1,0 +1,35 @@
+.form-select-country {
+   display: flex;
+   justify-content: center;
+   margin: 0 auto;
+}
+
+.select {
+   width: 300px;
+   background: -webkit-linear-gradient(top, #c8ffc4, #afb8ff);
+   border: 2px solid #999;
+   border-radius: 3px;
+   box-shadow: 0 0 5px #999;
+   color: #111;
+   font-size: 15px;
+   padding: 10px;
+}
+
+.form-widget {
+   width: 300px;
+   height: 300px;
+   text-align: center;
+   font-family: 'Times New Roman', Times, serif;
+   margin: 15% auto;
+   border: 1px solid black;
+   border-radius: 10px;
+}
+
+.block__first {
+   font-weight: 800;
+   font-size: 28px;
+}
+
+.block__second {
+   font-size: 18px;
+}
