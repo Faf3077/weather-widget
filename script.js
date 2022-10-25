@@ -24,30 +24,31 @@ fetch(url).then(function (element) {
    select.selectedIndex = 0;
 
    select.addEventListener('change', () => {
-      fetch('https://goweather.herokuapp.com/weather/' + select.value).then(function (element1) {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${select.value}&appid=5e425b2d5954bd1f8a2d5eb116e4f4a5`).then(function (element1) {
          return element1.json(); //преобразовал в массив 
-      }).then(function (data1) {
-         // полученые данные происваиваю элементам html
-         temperatureValue.innerHTML = data1.temperature
-         city.innerHTML = select.value
-         windValue.innerHTML = data1.wind
-         descriptionValue.innerHTML = data1.description
-         let a = data1.temperature.replace(/[^0-9 -]/g, '')//убираю лишние символы у значения температуры 
-         if (a > 20) {
+      }).then(function (cityData) {
+         console.log(cityData)
+         // заполнение данными элементов в html
+            temperatureValue.innerHTML = Math.round(cityData.main.temp - 273) + '°C'
+            city.innerHTML = select.value
+            windValue.innerHTML =  Math.round(cityData.wind.speed) + ' ' + 'м/с'
+            descriptionValue.innerHTML = cityData.weather[0].description
+
+         let tempColor = Math.round(cityData.main.temp - 273)
+         if (tempColor > 20) {
             form.style.background = "#FFFFCC";
          }
-         else if (0 <= a <= 20) {
+         else if (0 <= tempColor <= 20) {
             form.style.background = "#FFFFFF";
          }
-         if (a < 0) {
+         if (tempColor < 0) {
             form.style.background = "#CCFFFF";
          }
          sessionStorage.setItem('storageForm', form.style.background);
          sessionStorage.setItem('storageCity', select.value);
-         sessionStorage.setItem('storageTemp', data1.temperature);
-         sessionStorage.setItem('storageWind', data1.wind);
-         sessionStorage.setItem('storageDis', data1.description);
-         sessionStorage.setItem('storageSelect', select.value);
+         sessionStorage.setItem('storageTemp', cityData.temperature);
+         sessionStorage.setItem('storageWind', cityData.wind);
+         sessionStorage.setItem('storageDis', cityData.description);
       })
    })
 })
